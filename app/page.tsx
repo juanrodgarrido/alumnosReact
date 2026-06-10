@@ -1,46 +1,45 @@
-"use client";
 
-import Button from "../components/Button";
 import Box from "../components/Box";
-import Label from "../components/Label";
-import Input from "../components/Input";
+import Form from "../components/Form"
+import { Alumno } from "../lib/db"
+import { obtenerAlumnos } from "@/lib/db"
 
-export default function Home() {
+
+type listaAlumnos = {
+  listaAlumnos: Alumno[]
+};
+
+
+export default async function Home({listaAlumnos} : listaAlumnos) {
+
+  const alumnos = await obtenerAlumnos();
+  const addAlumno = function(){
+    
+  }
+
+
   return (
-    <div>
+    <div className = "flex justify-center space-x-20 mt-2 items-start">
       <Box>
-        <Label texto="DNI"></Label>
-        <Input type="text" placeholder="12345678A"></Input>
-        <Label texto="Nombre"></Label>
-        <Input type="text" placeholder="Juan"></Input>
-        <Label texto="Primer apellido"></Label>
-        <Input type="text" placeholder="Rodriguez"></Input>
-        <Label texto="Segundo apellido"></Label>
-        <Input type="text" placeholder="Garrido"></Input>
-        <Label texto="Fecha de nacimiento"></Label>
-        <Input type="date" placeholder=""></Input>
-        <Label texto="Especialidad"></Label>
-        <select defaultValue = "" className="text-black w-full mb-2 rounded-lg border border-gray-300 outline-none p-2">
-          <option value = "" disabled>Elige una opción</option>
-          <option value="DAM" >
-            DAM
-          </option>
-          <option value="DAW" >
-            DAW
-          </option>
-        </select>
-        <Label texto="Curso"></Label>
-        <select defaultValue = "" className="text-black w-full mb-2 rounded-lg border border-gray-300 outline-none p-2">
-          <option value = "" disabled>Elige una opción</option>
-          <option value="1" >
-            1º
-          </option>
-          <option value="2" >
-            2º
-          </option>
-        </select>
+        <Form>
 
-        <Button texto="Añadir alumno"></Button>
+        </Form>
+      </Box>
+      <Box>
+        <div>
+          <ul>
+            {alumnos.map((alumno) => (
+              <li key = {alumno.dni}>
+                <div className = "text-black mb-3">
+                  <p>{alumno.nombre} {alumno.apellido1} {alumno.apellido2}</p>
+                  <p>{alumno.f_nacimiento.toLocaleDateString()} ({alumno.edad} años)</p>
+                  <p>{alumno.curso}º {alumno.especialidad}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          {alumnos.length === 0 ? <p>No hay tareas pendientes</p> : null}
+        </div>
       </Box>
     </div>
   );

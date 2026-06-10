@@ -5,7 +5,7 @@ export type Alumno = {
     nombre: string,
     apellido1: string,
     apellido2: string,
-    f_nacimiento: string,
+    f_nacimiento: Date,
     edad: number,
     especialidad: string,
     curso: number,
@@ -17,7 +17,7 @@ export async function abrirConexion() {
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+    database: process.env.DB_NAME,    
     });
 }
 
