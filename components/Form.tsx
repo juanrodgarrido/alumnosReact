@@ -4,6 +4,7 @@ import Label from "./Label";
 import Input from "./Input";
 import Button from "./Button";
 import { useState } from "react";
+import { addAlumno } from "../lib/actions"
 
 export default function Form(){
 
@@ -12,40 +13,33 @@ export default function Form(){
 
 
     return(
-        <div className = "flex flex-col items-center">
-            <Label texto="DNI"></Label>
-        <Input type="text" placeholder="12345678A"></Input>
+        <div className="flex flex-col items-center">
+      <form action={addAlumno}>
+        <Label texto="DNI"></Label>
+        <Input type="text" name="dni" placeholder="12345678A" required pattern="[0-9]{8}[A-Za-z]{1}" maxLength={9}></Input> {/* Usamos pattern para controlar que pongan el DNI en el formato correcto y maxLength para limitar los caracteres*/}
         <Label texto="Nombre"></Label>
-        <Input type="text" placeholder="Juan"></Input>
+        <Input type="text" name="nombre" placeholder="Juan" required maxLength={20}></Input>
         <Label texto="Primer apellido"></Label>
-        <Input type="text" placeholder="Rodriguez"></Input>
+        <Input type="text" name="apellido1" placeholder="Rodriguez" required maxLength={20}></Input>
         <Label texto="Segundo apellido"></Label>
-        <Input type="text" placeholder="Garrido"></Input>
+        <Input type="text" name="apellido2" placeholder="Garrido" required maxLength={20}></Input>
         <Label texto="Fecha de nacimiento"></Label>
-        <Input type="date" placeholder=""></Input>
+        <Input type="date" name="f_nacimiento" required></Input>
         <Label texto="Especialidad"></Label>
-        <select defaultValue = "" className="text-black w-full mb-2 rounded-lg border border-gray-300 outline-none p-2">
-          <option value = "" disabled>Elige una opción</option>
-          <option value="DAM" >
-            DAM
-          </option>
-          <option value="DAW" >
-            DAW
-          </option>
+        <select name="especialidad" defaultValue="" className="text-black w-full mb-2 rounded-lg border border-gray-300 outline-none p-2" required>
+          <option value="" disabled>Elige una opción</option>
+          <option value="DAM">DAM</option>
+          <option value="DAW">DAW</option>
         </select>
         <Label texto="Curso"></Label>
-        <select defaultValue = "" className="text-black w-full mb-2 rounded-lg border border-gray-300 outline-none p-2">
-          <option value = "" disabled>Elige una opción</option>
-          <option value="1" >
-            1º
-          </option>
-          <option value="2" >
-            2º
-          </option>
+        <select name="curso" defaultValue="" className="text-black w-full mb-2 rounded-lg border border-gray-300 outline-none p-2" required>
+          <option value="" disabled>Elige una opción</option>
+          <option value="1">1º</option>
+          <option value="2">2º</option>
         </select>
-
         <Button texto="Añadir alumno"></Button>
-        </div>
+      </form>
+    </div>
         
     )
 }

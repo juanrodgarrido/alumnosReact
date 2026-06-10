@@ -5,8 +5,7 @@ export type Alumno = {
     nombre: string,
     apellido1: string,
     apellido2: string,
-    f_nacimiento: Date,
-    edad: number,
+    f_nacimiento: Date,    
     especialidad: string,
     curso: number,
     pagado: boolean
@@ -27,7 +26,7 @@ export async function obtenerAlumnos(){
     const conexion = await abrirConexion();
 
     const [filas] = await conexion.execute(
-        "SELECT * FROM alumnos ORDER BY apellido1 DESC"
+        "SELECT * FROM alumnos ORDER BY apellido1 ASC"
     );
 
     await conexion.end();
@@ -37,13 +36,13 @@ export async function obtenerAlumnos(){
 
 }
 
-export async function insertarAlumno({dni, nombre, apellido1, apellido2, f_nacimiento, edad, especialidad, curso, pagado} : Alumno){
+export async function insertarAlumno({dni, nombre, apellido1, apellido2, f_nacimiento, especialidad, curso, pagado} : Alumno){
 
     const conexion = await abrirConexion();
 
     await conexion.execute(
-        "INSERT INTO alumnos (dni, nombre, apellido1, apellido2, f_nacimiento, edad, especialidad, curso, pagado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        [dni, nombre, apellido1, apellido2, f_nacimiento, edad, especialidad, curso, pagado]
+        "INSERT INTO alumnos (dni, nombre, apellido1, apellido2, f_nacimiento, especialidad, curso, pagado) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        [dni, nombre, apellido1, apellido2, f_nacimiento, especialidad, curso, pagado]
     )
 
     await conexion.end();
