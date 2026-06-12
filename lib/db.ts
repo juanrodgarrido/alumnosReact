@@ -48,6 +48,18 @@ export async function insertarAlumno({dni, nombre, apellido1, apellido2, f_nacim
     await conexion.end();
 }
 
+export async function borrarAlumno(dni : string){
+
+    const conexion = await abrirConexion();
+
+    await conexion.execute(
+        "DELETE FROM alumnos WHERE dni = ?",
+        [dni]
+    )
+
+    await conexion.end();
+}
+
 
 
 
