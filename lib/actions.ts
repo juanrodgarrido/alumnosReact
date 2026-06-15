@@ -19,8 +19,9 @@ export async function addAlumno(formData: FormData) {
     revalidatePath("/")
 }
 
-export async function deleteAlumno(dni: string){
-
+export async function deleteAlumno(dni: string){    
     await borrarAlumno(dni);
     revalidatePath("/")
+
+
 }

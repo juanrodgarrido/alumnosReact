@@ -3,7 +3,10 @@
 import Label from "./Label";
 import Input from "./Input";
 import Button from "./Button";
+
 import { addAlumno } from "../lib/actions"
+
+
 
 export default function Form(){
 
@@ -12,7 +15,7 @@ export default function Form(){
 
 
     return(
-        <div >
+        <div >          
       <form action={addAlumno} className="flex flex-col items-center">
         <Label texto="DNI"></Label>
         <Input type="text" name="dni" placeholder="12345678A" required pattern="[0-9]{8}[A-Za-z]{1}" maxLength={9}></Input> {/* Usamos pattern para controlar que pongan el DNI en el formato correcto y maxLength para limitar los caracteres*/}
@@ -36,7 +39,7 @@ export default function Form(){
           <option value="1">1º</option>
           <option value="2">2º</option>
         </select>
-        <Button texto="Añadir alumno"></Button>
+        <Button texto="Añadir alumno" type = "submit"></Button>
       </form>
     </div>
         
