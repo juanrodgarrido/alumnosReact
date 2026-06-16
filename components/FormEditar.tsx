@@ -1,4 +1,5 @@
 import { Alumno } from "../lib/db"
+import { useTransition } from "react";
 
 import Label from "./Label";
 import Input from "./Input";
@@ -6,14 +7,22 @@ import Button from "./Button";
 import { edAlumno } from "../lib/actions";
 
 type FormEditarProps = {
-    alumnoEditar : Alumno;
+    alumnoEditar : Alumno;    
+    setModo: (modo: "ninguno" | "add" | "borrar" | "editar") => void;
+
 }
+export default function FormEditar({alumnoEditar, setModo} : FormEditarProps){
 
-export default function FormEditar({alumnoEditar} : FormEditarProps){
+    const [pendiente, startTransition] = useTransition();
 
-
+    function enviarDatos(formData : FormData){
+        startTransition(async () => {
+            await edAlumno(formData);
+            setModo("ninguno");
+        })
+    }
     return(
-        <form action={edAlumno} className="flex flex-col justify-between h-full ">
+        <form action={enviarDatos} className="flex flex-col justify-between h-full ">
                 <div>
                 <Label texto="DNI"></Label>
                 <Input type="text" name="dni" defaultValue={alumnoEditar.dni} className = "bg-gray-200" readOnly maxLength={9}></Input> {/* Usamos pattern para controlar que pongan el DNI en el formato correcto y maxLength para limitar los caracteres*/}

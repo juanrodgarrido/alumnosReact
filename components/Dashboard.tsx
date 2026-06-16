@@ -27,7 +27,7 @@ export default function Dashboard({listaAlumnos} : AlumnoProps){
               <div className = "flex w-full justify-center space-x-20 mt-2 items-start">
               {modo === "add" || (modo === "editar" && alumnoEditar) ? <Box>
                 {modo === "add" ? <Form></Form> : null}
-                {modo === "editar" && alumnoEditar ? <FormEditar key={alumnoEditar.dni} alumnoEditar = {alumnoEditar}></FormEditar> : null}
+                {modo === "editar" && alumnoEditar ? <FormEditar setModo={setModo} key={alumnoEditar.dni} alumnoEditar = {alumnoEditar}></FormEditar> : null}
               </Box> : null }
               
               <Box>
