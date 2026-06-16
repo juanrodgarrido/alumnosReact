@@ -6,7 +6,7 @@ type Box = {
 export default function Box({children} : Box){
 
     return(
-        <div className = "flex flex-col w-1/4 h-[600px] overflow-y-auto items-center justify-self-center bg-white rounded-xl p-5 shadow-[0_4px_10px_rgba(0,0,0,0.05)]">
+        <div className = "flex flex-col w-1/4 h-165 overflow-y-auto items-center justify-self-center bg-white rounded-xl p-5 shadow-[0_4px_10px_rgba(0,0,0,0.05)]">
             {children}
         </div>
     )

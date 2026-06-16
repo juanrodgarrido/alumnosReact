@@ -7,9 +7,10 @@ import {useState} from "react";
 type AlumnoProps = {
     listaAlumnos : Alumno[]
     modo: "ninguno" | "add" | "borrar" | "editar";
+    setAlumnoEditar : (alumno : Alumno) => void
 }
 
-export default function Alumnos({listaAlumnos, modo} : AlumnoProps){
+export default function Alumnos({listaAlumnos, modo, setAlumnoEditar} : AlumnoProps){
 
   const alumnosPorPagina = 6;
   const [pagina, setPagina] = useState(1);
@@ -29,13 +30,17 @@ export default function Alumnos({listaAlumnos, modo} : AlumnoProps){
     
     return(
         <div className="w-full flex flex-col justify-between h-full">
+          
           <ul className="w-full">
+            <p className = "text-center font-bold text-2xl mb-6">Lista de alumnos</p>
             {alumnosPagina.map((alumno) => (
               <li key = {alumno.dni}>               
                 <div className = "text-black mb-3 w-full text-center">
                   <div className = "relative flex justify-center items-center">
                   <p>{alumno.nombre} {alumno.apellido1} {alumno.apellido2} </p>
                   {modo === "borrar" ? (<button className="absolute right-0 border-none bg-red-500 px-2.5 py-1.5 rounded-md cursor-pointer" onClick={() => borrar(alumno.dni)}>✖</button>
+                    ) : null}
+                    {modo === "editar" ? (<button className="absolute right-0 border-none bg-yellow-300 px-2.5 py-1.5 rounded-md cursor-pointer" onClick={() => setAlumnoEditar(alumno)}>✎</button>
                     ) : null}
                   </div>
                   <p>{alumno.f_nacimiento.toLocaleDateString()}</p>

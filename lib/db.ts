@@ -60,6 +60,18 @@ export async function borrarAlumno(dni : string){
     await conexion.end();
 }
 
+export async function editarAlumno({nombre, apellido1, apellido2, f_nacimiento, especialidad, curso, pagado, dni} : Alumno){
+
+    const conexion = await abrirConexion();
+
+    await conexion.execute(
+        "UPDATE alumnos SET nombre = ?, apellido1 = ?, apellido2 = ?, f_nacimiento = ?, especialidad = ?, curso = ?, pagado = ? WHERE dni = ?",
+        [nombre, apellido1, apellido2, f_nacimiento, especialidad, curso, pagado, dni]
+    )
+
+    await conexion.end();
+}
+
 
 
 

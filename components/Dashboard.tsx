@@ -4,6 +4,7 @@ import Box from "../components/Box";
 import Form from "../components/Form"
 import Alumnos from "../components/Alumnos"
 import Barra from "../components/Barra"
+import FormEditar from "../components/FormEditar"
 import { Alumno } from "../lib/db"
 
 type AlumnoProps = {
@@ -22,17 +23,15 @@ export default function Dashboard({listaAlumnos} : AlumnoProps){
 
     return(
         <div className = "flex flex-col items-center justify-center  mt-2">
-              <Barra modo = {modo} setModo = {setModo}></Barra>
+              <Barra modo = {modo} setModo = {setModo} setAlumnoEditar = {setAlumnoEditar}></Barra>
               <div className = "flex w-full justify-center space-x-20 mt-2 items-start">
-              {modo === "add" ? <Box>
-                <Form>
-                </Form>
-              </Box>
-              :
-              null }
+              {modo === "add" || (modo === "editar" && alumnoEditar) ? <Box>
+                {modo === "add" ? <Form></Form> : null}
+                {modo === "editar" && alumnoEditar ? <FormEditar key={alumnoEditar.dni} alumnoEditar = {alumnoEditar}></FormEditar> : null}
+              </Box> : null }
               
               <Box>
-                <Alumnos listaAlumnos={listaAlumnos} modo = {modo}>
+                <Alumnos listaAlumnos={listaAlumnos} modo = {modo} setAlumnoEditar={setAlumnoEditar}>
                 </Alumnos>
               </Box>
               </div>
